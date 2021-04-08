@@ -10,9 +10,9 @@ const PostSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    date: {
-        type: Date,
-        default: Date.now
+    link: {
+        type: String,
+        required: true
     }
 });
 
