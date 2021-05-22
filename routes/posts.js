@@ -7,6 +7,7 @@ const Post = require('../models/Post');
 //GET BACK ALL THE POSTS
 router.get('/', async (req, res) =>{
     try{
+        callScrape();
         const posts = await Post.find();
         res.json(posts);
     }catch (err){
@@ -18,7 +19,8 @@ router.get('/', async (req, res) =>{
 router.post('/', async (req, res) =>{
     const post = new Post({
         title: req.body.title,
-        price: req.body.price
+        price: req.body.price,
+        link: req.body.link
     });
     try {
     //save post and catch/respond with an error if it exists
@@ -62,5 +64,17 @@ router.patch('/:postId', async (req, res) =>{
         res.json({message: err});
     }
 });
+
+function callScrape(){
+    const scrape = require('../scripts/scrape');
+    scrape.posts('https://reddit.com/r/ACturnips/new.json?raw_json=1')
+    .then((post) => {
+        //Only save post if it doesn't already exist in database
+        //if post not empty and unixTimeCheck  
+        post.save()
+
+        //else don't save
+    })
+}
 
 module.exports = router;

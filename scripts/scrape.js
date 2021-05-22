@@ -6,18 +6,20 @@ const Post = require('../models/Post');
 async function fetchPosts(URL) {
     const response = await fetch(URL);
     const posts = await response.json();
-    let post = posts.data.children[1].data //work with a group of posts not just one
+    let post = posts.data.children[0].data //work with a group of posts not just one
 
-    //clean and display data
+    //clean all posts
     let title = post.title.slice(5)
     let price = post.title.replace(/[^0-9]/g, '')//modify method to get price
     let unixTime = post.created_utc
     let link = post.id
     //Failure if price isn't parsed
+    
     //console.log("Title : " + title)
     //console.log("Price : " + price + " Bells")
     //console.log("Link : reddit.com/" + link)
     //console.log("Unix time of post : " + unixTime)
+
 
 
     return new Post({
@@ -33,7 +35,7 @@ async function fetchPosts(URL) {
     }
 
     change text to numbers
-    
+
 }
 */
 

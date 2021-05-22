@@ -12,7 +12,7 @@ const PostSchema = mongoose.Schema({
     },
     link: {
         type: String,
-        required: true
+        required: true    
     }
 });
 

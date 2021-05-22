@@ -31,9 +31,7 @@ mongoose.connect(
 );
 
 var db = mongoose.connection;
-const scrape = require('./scripts/scrape');
-scrape.posts('https://reddit.com/r/ACturnips/new.json?raw_json=1')
-    .then((post) => post.save())
+
 
 
 
@@ -47,4 +45,9 @@ since the store has prices from 8am-noon, noon-10pm
 revisit the post and check if "link_flair_text" = "finished" => delete from database
 */
 app.listen(PORT);
+
+//periodic scraping
+//how to periodically scrape while keeping server open?
+//only scrape when requested on the front end maybe
+
 
